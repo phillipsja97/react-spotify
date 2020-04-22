@@ -1,13 +1,14 @@
-import React from 'react';
+import React, { Component } from 'react';
 import './App.scss';
 import SpotifyWebApi from 'spotify-web-api-js';
 
 const spotifyApi = new SpotifyWebApi();
 
-class App extends React.Component {
-  constructor() {
+class App extends Component {
+  constructor(){
     super();
     const params = this.getHashParams();
+    console.log(params)
     const token = params.access_token;
     console.log(token);
     if (token) {
@@ -15,6 +16,7 @@ class App extends React.Component {
     }
     this.state = {
       loggedIn: token ? true : false,
+      nowPlaying: { name: 'Not Checked', albumArt: '' }
     }
   }
   getHashParams() {
@@ -28,6 +30,7 @@ class App extends React.Component {
     }
     return hashParams;
   }
+
   render () {
 return (
     <div className="App">
