@@ -85,7 +85,7 @@ class App extends Component {
     const { token } = this.state;
 return (
     <div className="App">
-     { token ? <Card className={classes.root}>
+      <Card className={classes.root}>
       <CardHeader
         avatar={
           <Avatar alt="Remy Sharp" src="https://www.freepnglogos.com/uploads/spotify-logo-png/file-spotify-logo-png-4.png" className={classes.large} />
@@ -105,7 +105,6 @@ return (
       <CardActions disableSpacing>
       </CardActions>
     </Card>
-    : <Profile /> }
     </div>
   );
   }
