@@ -17,6 +17,7 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import LoginButton from './Components/Shared/LoginButtonScreen/LoginButtonScreen';
+import Profile from './Components/Pages/Profile/Profile';
 
 const spotifyApi = new SpotifyWebApi();
 
@@ -81,9 +82,10 @@ class App extends Component {
 
   render () {
     const { classes } = this.props;
+    const { token } = this.state;
 return (
     <div className="App">
-     <Card className={classes.root}>
+     { token ? <Card className={classes.root}>
       <CardHeader
         avatar={
           <Avatar alt="Remy Sharp" src="https://www.freepnglogos.com/uploads/spotify-logo-png/file-spotify-logo-png-4.png" className={classes.large} />
@@ -103,6 +105,7 @@ return (
       <CardActions disableSpacing>
       </CardActions>
     </Card>
+    : <Profile /> }
     </div>
   );
   }
