@@ -23,15 +23,33 @@ const spotifyApi = new SpotifyWebApi();
 
 const styles = theme => ({
   root: {
-    maxWidth: 345,
+    maxWidth: 600,
+    background: 'transparent',
+    border: '2px solid #01FFFF',
+    borderRadius: '25px'
   },
   media: {
     height: 0,
     paddingTop: '56.25%', // 16:9
   },
+  title: {
+    color: '#01FFC3',
+  },
   avatar: {
     backgroundColor: red[500],
   },
+  text: {
+    color: '#FFB3FD',
+    justifyContent: 'center',
+    alignItems: 'center',
+    textAlign: 'center'
+  },
+  spotify: {
+    color: '#01FFC3',
+    justifyContent: 'center',
+    alignItems: 'center',
+    textAlign: 'center'
+  }
 });
 
 class App extends Component {
@@ -68,23 +86,18 @@ return (
      <Card className={classes.root}>
       <CardHeader
         avatar={
-          <Avatar aria-label="recipe" className={classes.avatar}>
-            R
-          </Avatar>
+          <Avatar alt="Remy Sharp" src="https://www.freepnglogos.com/uploads/spotify-logo-png/file-spotify-logo-png-4.png" className={classes.large} />
         }
-        action={
-          <IconButton aria-label="settings">
-            <MoreVertIcon />
-          </IconButton>
-        }
-        title="Shrimp and Chorizo Paella"
-        subheader="September 14, 2016"
+        title="Podcast Heaven"
+        className={classes.title}
       />
       <LoginButton />
-      <CardContent>
-        <Typography variant="body2" color="textSecondary" component="p">
-          This impressive paella is a perfect party dish and a fun meal to cook together with your
-          guests. Add 1 cup of frozen peas along with the mussels, if you like.
+      <CardContent className={classes.center}>
+        <Typography variant="body2" className={classes.text} component="p">
+          Login using your spotify account. Create your podcast list, add your favorite podcasts, and discover new shows all in one place.
+        </Typography>
+        <Typography variant="body2" className={classes.spotify} component="p">
+          Powered by Spotify API
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
