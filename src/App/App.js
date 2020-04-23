@@ -1,59 +1,18 @@
-import React, { Component } from 'react';
-import './App.scss';
+import React from 'react';
 import SpotifyWebApi from 'spotify-web-api-js';
-import { withStyles } from "@material-ui/core/styles";
-import clsx from 'clsx';
-import Card from '@material-ui/core/Card';
-import CardHeader from '@material-ui/core/CardHeader';
-import CardMedia from '@material-ui/core/CardMedia';
-import CardContent from '@material-ui/core/CardContent';
-import CardActions from '@material-ui/core/CardActions';
-import Collapse from '@material-ui/core/Collapse';
-import Avatar from '@material-ui/core/Avatar';
-import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
-import { red } from '@material-ui/core/colors';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import ShareIcon from '@material-ui/icons/Share';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
-import LoginButton from './Components/Shared/LoginButtonScreen/LoginButtonScreen';
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Redirect } from 'react-router-dom';
 import Profile from './Components/Pages/Profile/Profile';
+import NavBar from './Components/Shared/NavBar/NavBar';
+import Auth from './Components/Pages/Auth/Auth';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const spotifyApi = new SpotifyWebApi();
 
-
-const styles = theme => ({
-  root: {
-    maxWidth: 600,
-    background: 'transparent',
-    border: '2px solid #01FFFF',
-    borderRadius: '25px'
-  },
-  media: {
-    height: 0,
-    paddingTop: '56.25%', // 16:9
-  },
-  title: {
-    color: '#01FFC3',
-  },
-  avatar: {
-    backgroundColor: red[500],
-  },
-  text: {
-    color: '#FFB3FD',
-    justifyContent: 'center',
-    alignItems: 'center',
-    textAlign: 'center'
-  },
-  spotify: {
-    color: '#01FFC3',
-    justifyContent: 'center',
-    alignItems: 'center',
-    textAlign: 'center'
-  }
-});
-
-class App extends Component {
+class App extends React.Component {
   constructor(){
     super();
     const params = this.getHashParams();
@@ -64,7 +23,7 @@ class App extends Component {
       spotifyApi.setAccessToken(token);
     }
     this.state = {
-      loggedIn: token ? true : false,
+      authed: token ? true : false,
       nowPlaying: { name: 'Not Checked', albumArt: '' }
     }
   }
@@ -79,35 +38,33 @@ class App extends Component {
     }
     return hashParams;
   }
-
-  render () {
-    const { classes } = this.props;
-    const { token } = this.state;
-return (
-    <div className="App">
-      <Card className={classes.root}>
-      <CardHeader
-        avatar={
-          <Avatar alt="Remy Sharp" src="https://www.freepnglogos.com/uploads/spotify-logo-png/file-spotify-logo-png-4.png" className={classes.large} />
-        }
-        title="Podcast Heaven"
-        className={classes.title}
-      />
-      <LoginButton />
-      <CardContent className={classes.center}>
-        <Typography variant="body2" className={classes.text} component="p">
-          Login using your spotify account. Create your podcast list, add your favorite podcasts, and discover new shows all in one place.
-        </Typography>
-        <Typography variant="body2" className={classes.spotify} component="p">
-          Powered by Spotify API
-        </Typography>
-      </CardContent>
-      <CardActions disableSpacing>
-      </CardActions>
-    </Card>
+  
+  render() {
+    const { authed } = this.state;
+    // if (authed) {
+      return (
+        <div className="App">
+        <Router>
+          <NavBar authed={authed}/>
+            <Switch>
+              <Route path="/" exact component={Auth} authed={authed} />
+              <Route path="/Profile" exact component={Profile} authed={authed} />
+            </Switch>
+        </Router>
     </div>
-  );
-  }
+      );
+    // } else {
+    //   return (
+    //     <div className="App">
+    //     <Router>
+    //             <Switch>
+    //               <Route path="/" exact component={Auth} authed={authed}/>
+    //             </Switch>
+    //     </Router>
+    // </div>
+    //   )
+    }
+  // }
 }
 
-export default withStyles(styles, { withTheme: true })(App);
+export default App;
