@@ -72,24 +72,28 @@ const ProfileCard = () => {
 
 
   return (
-    <Card className={cx(styles.card, shadowStyles.root)}>
-<CardContent>
-  <Avatar className={styles.avatar} src={userProfile.images ? userProfile.images[0].url : null} />
-  <h3 className={styles.heading}>{userProfile.display_name}</h3>
-  <span className={styles.subheader}>{userProfile.country}</span>
-</CardContent>
-<Divider light />
-<Box display={'flex'}>
-  <Box p={2} flex={'auto'} className={borderedGridStyles.item}>
-    <p className={styles.statLabel}>Followers</p>
-<p className={styles.statValue}>{userProfile.followers ? userProfile.followers.total : null}</p>
-  </Box>
-  <Box p={2} flex={'auto'} className={borderedGridStyles.item}>
-    <p className={styles.statLabel}>Following</p>
-    <p className={styles.statValue}>12</p>
-  </Box>
-</Box>
-</Card>
+    <div className="profile">
+      <div className="profileHeader">
+        <Card className={cx(styles.card, shadowStyles.root)}>
+          <CardContent>
+            <Avatar className={styles.avatar} src={userProfile.images ? userProfile.images[0].url : null} />
+            <h3 className={styles.heading}>{userProfile.display_name}</h3>
+            <span className={styles.subheader}>{userProfile.country}</span>
+          </CardContent>
+          <Divider light />
+          <Box display={'flex'}>
+            <Box p={2} flex={'auto'} className={borderedGridStyles.item}>
+              <p className={styles.statLabel}>Followers</p>
+              <p className={styles.statValue}>{userProfile.followers ? userProfile.followers.total : null}</p>
+            </Box>
+            <Box p={2} flex={'auto'} className={borderedGridStyles.item}>
+              <p className={styles.statLabel}>Following</p>
+              <p className={styles.statValue}>12</p>
+            </Box>
+          </Box>
+        </Card>
+      </div>
+    </div>
   );
 };
 
