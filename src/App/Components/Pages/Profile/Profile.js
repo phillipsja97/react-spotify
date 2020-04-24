@@ -9,6 +9,8 @@ import Divider from '@material-ui/core/Divider';
 import { useFadedShadowStyles } from '@mui-treasury/styles/shadow/faded';
 import { useGutterBorderedGridStyles } from '@mui-treasury/styles/grid/gutterBordered';
 import spotifyWebApi from 'spotify-web-api-js';
+import Playlist from '../../Shared/UserCard/UserCard';
+import './Profile.scss';
 
 const spotifyApi = new spotifyWebApi()
 
@@ -17,6 +19,8 @@ const useStyles = makeStyles(({ palette }) => ({
     borderRadius: 12,
     minWidth: 256,
     textAlign: 'center',
+    backgroundColor: '#43464B',
+    border: '2px solid #01FFFF'
   },
   avatar: {
     width: 60,
@@ -29,15 +33,17 @@ const useStyles = makeStyles(({ palette }) => ({
     letterSpacing: '0.5px',
     marginTop: 8,
     marginBottom: 0,
+    color: '#01FFC3',
   },
   subheader: {
     fontSize: 14,
     color: 'grey',
     marginBottom: '0.875em',
+    color: '#01FFC3',
   },
   statLabel: {
     fontSize: 12,
-    color: 'grey',
+    color: '#01FFC3',
     fontWeight: 500,
     fontFamily:
       '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
@@ -48,6 +54,7 @@ const useStyles = makeStyles(({ palette }) => ({
     fontWeight: 'bold',
     marginBottom: 4,
     letterSpacing: '1px',
+    color: '#01FFC3',
   },
 }));
 
@@ -61,7 +68,6 @@ const ProfileCard = () => {
     height: '50%',
   });
   const [userProfile, setUserProfile] = useState({});
-  const [followers, setFollowers] = useState(0);
 
   useEffect(() => {
     spotifyApi.getMe()
@@ -93,74 +99,11 @@ const ProfileCard = () => {
           </Box>
         </Card>
       </div>
-    </div>
+      <div className="playlists">
+        <Playlist />
+      </div>
+    </div> 
   );
 };
 
 export default ProfileCard;
-
-// import React from 'react';
-// import './Profile.scss';
-// import SpotifyWebApi from 'spotify-web-api-js';
-
-// const spotifyApi = new SpotifyWebApi();
-
-// class Profile extends React.Component {
-//   constructor(){
-//     super();
-//     const params = this.getHashParams();
-//     console.log(params)
-//     const token = params.access_token;
-//     console.log(token, 'tokenProfile');
-//     if (token) {
-//       spotifyApi.setAccessToken(token);
-//     }
-//     this.state = {
-//       authed: token ? true : false,
-//       userProfile: [],
-//     }
-//   }
-//   getHashParams() {
-//     var hashParams = {};
-//     var e, r = /([^&;=]+)=?([^&;]*)/g,
-//         q = window.location.hash.substring(1);
-//     e = r.exec(q)
-//     while (e) {
-//        hashParams[e[1]] = decodeURIComponent(e[2]);
-//        e = r.exec(q);
-//     }
-//     return hashParams;
-//   }
-
-//   getUserProfile() {
-//     spotifyApi.getMe()
-//       .then((response) => {
-//         this.setState({ userProfile: {
-//           name: response.display_name,
-//           image: response.images[0].url,
-//           product: response.product,
-//           followers: response.followers.total,
-//           country: response.country
-//         }
-//       })
-//     })
-//     .catch((errorFromGetProfile) => console.error(errorFromGetProfile));
-//  }
-
-//  componentDidMount() {
-//    this.getUserProfile();
-//  }
- 
-//  render() {
-//     const { authed } = this.props;
-//     const { userProfile } = this.state;
-//     console.log(userProfile, 'user');
-//     return (
-//       <div className="profile">
-//       <h1 className="welcome">Hello {userProfile.name}, you are logged in!</h1>
-//       </div>
-//     )
-//   }
-//  }
-
-//  export default Profile;
