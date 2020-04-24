@@ -16,9 +16,7 @@ class App extends React.Component {
   constructor(){
     super();
     const params = this.getHashParams();
-    console.log(params)
     const token = params.access_token;
-    console.log(token);
     if (token) {
       spotifyApi.setAccessToken(token);
     }

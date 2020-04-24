@@ -37,8 +37,7 @@ class Auth extends React.Component {
     const { authed } = this.state;
     return (
       <div className="auth">
-     { authed ? <Link className="btn btn-danger" to={'/Profile'}>Return to Profile</Link>
-              : <Card className="text-center" style={{ color: 'white',
+              <Card className="text-center" style={{ color: 'white',
                                               width: '25em',
                                               border: '2px solid #01FFFF',
                                               background: 'transparent' }}>
@@ -51,17 +50,13 @@ class Auth extends React.Component {
                     </Card.Body>
                   <Card.Footer className="textMuted">Powered by Spotify.</Card.Footer>
                 </Card>
-     }
       </div>
     )
   }
- 
 }
 
 export default Auth;
 
-
-{/* <Link className="btn btn-danger" to={'/Profile'}>Return to Profile</Link> */}
 
 
 
