@@ -1,4 +1,10 @@
 .userPlaylists {
+  height: 68vh;
+  border: 2px solid #01FFFF;
+  border-radius: 5px;
+}
+
+.scroll {
   overflow-y: scroll;
-  height: 65vh;
+  height: 60vh;
 }

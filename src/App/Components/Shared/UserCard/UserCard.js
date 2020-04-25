@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListRow from '../ListRow/ListRow';
 import spotifyWebApi from 'spotify-web-api-js';
+import CardHeader from '@material-ui/core/CardHeader';
 import './UserCard.scss';
 
 
@@ -14,6 +15,12 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: '50vw',
     backgroundColor: theme.palette.background.paper,
   },
+  header: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    color: '#FFB3FD',
+    borderBottom: '1px solid #FFB3FD'
+  }
 }));
 
 export default function FolderList() {
@@ -30,9 +37,17 @@ export default function FolderList() {
 
   return (
     <div className="userPlaylists">
-      <List>
-        { (playlists.items) ? playlists.items.map((playlist) => <ListRow key={playlist.id} playlist={playlist} />) : null }
-      </List>
+      <div className="header">
+        <CardHeader
+          title="My Playlists"
+          className={classes.header}
+        />
+      </div>
+      <div className="scroll">
+        <List>
+          { (playlists.items) ? playlists.items.map((playlist) => <ListRow key={playlist.id} playlist={playlist} />) : null }
+        </List>
+      </div>
     </div>
   );
 }

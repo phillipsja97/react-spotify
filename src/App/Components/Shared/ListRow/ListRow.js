@@ -25,7 +25,7 @@ const ListRow = props => {
           <ListItemAvatar>
             <Avatar alt="Remy Sharp" variant="square" src={playlist.playlist.images[0].url} />
           </ListItemAvatar>
-        <ListItemText className={classes.text} primary={playlist.playlist.name} secondary="Jan 9, 2014" />
+        <ListItemText className={classes.text} primary={playlist.playlist.name} secondary={playlist.playlist.owner.name} />
       </ListItem>
   )
 }
