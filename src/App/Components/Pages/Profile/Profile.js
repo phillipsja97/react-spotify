@@ -10,6 +10,7 @@ import { useFadedShadowStyles } from '@mui-treasury/styles/shadow/faded';
 import { useGutterBorderedGridStyles } from '@mui-treasury/styles/grid/gutterBordered';
 import spotifyWebApi from 'spotify-web-api-js';
 import Playlist from '../../Shared/UserCard/UserCard';
+import TopSongs from '../../Shared/TopSongs/TopSongs';
 import './Profile.scss';
 
 const spotifyApi = new spotifyWebApi()
@@ -99,8 +100,13 @@ const ProfileCard = () => {
           </Box>
         </Card>
       </div>
-      <div className="playlists">
-        <Playlist />
+      <div className="bottomWrapper">
+        <div className="playlists">
+          <Playlist />
+        </div>
+        <div className="topSongs">
+          <TopSongs />
+        </div>
       </div>
     </div> 
   );
