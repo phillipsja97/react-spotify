@@ -8,14 +8,17 @@ import Avatar from '@material-ui/core/Avatar';
 import Divider from '@material-ui/core/Divider';
 import { useFadedShadowStyles } from '@mui-treasury/styles/shadow/faded';
 import { useGutterBorderedGridStyles } from '@mui-treasury/styles/grid/gutterBordered';
+import Button from '@material-ui/core/Button';
+import ButtonGroup from '@material-ui/core/ButtonGroup';
 import spotifyWebApi from 'spotify-web-api-js';
 import Playlist from '../../Shared/UserCard/UserCard';
 import TopSongs from '../../Shared/TopSongs/TopSongs';
+import Artists from '../../Shared/Arists/Artists';
 import './Profile.scss';
 
 const spotifyApi = new spotifyWebApi()
 
-const useStyles = makeStyles(({ palette }) => ({
+const useStyles = makeStyles((theme) => ({
   card: {
     borderRadius: 12,
     minWidth: 256,
@@ -57,18 +60,26 @@ const useStyles = makeStyles(({ palette }) => ({
     letterSpacing: '1px',
     color: '#01FFC3',
   },
+  buttons: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    color: '#FFB3FD',
+    alignItems: 'center',
+}
 }));
 
 
 
-const ProfileCard = () => {
-  const styles = useStyles();
+export default function ProfileCard() {
+  const classes = useStyles();
   const shadowStyles = useFadedShadowStyles();
   const borderedGridStyles = useGutterBorderedGridStyles({
     borderColor: 'rgba(0, 0, 0, 0.08)',
     height: '50%',
   });
   const [userProfile, setUserProfile] = useState({});
+  const [viewRender, setViewRender] = useState('');
 
   useEffect(() => {
     spotifyApi.getMe()
@@ -77,39 +88,59 @@ const ProfileCard = () => {
     })
   }, [userProfile.display_name]);
 
+  const PlaylistRender = (e) => {
+    setViewRender('Playlist');
+  }
+
+  const SongsRender = (e) => {
+    setViewRender('Songs');
+  }
+
+  const ArtistRender = (e) => {
+    setViewRender('Artists');
+  }
+
 
   return (
     <div className="profile">
       <div className="profileHeader">
-        <Card className={cx(styles.card, shadowStyles.root)}>
+        <Card className={cx(classes.card, shadowStyles.root)}>
           <CardContent>
-            <Avatar className={styles.avatar} src={userProfile.images ? userProfile.images[0].url : null} />
-            <h3 className={styles.heading}>{userProfile.display_name}</h3>
-            <span className={styles.subheader}>{userProfile.country}</span>
+            <Avatar className={classes.avatar} src={userProfile.images ? userProfile.images[0].url : null} />
+            <h3 className={classes.heading}>{userProfile.display_name}</h3>
+            <span className={classes.subheader}>{userProfile.country}</span>
           </CardContent>
           <Divider light />
           <Box display={'flex'}>
             <Box p={2} flex={'auto'} className={borderedGridStyles.item}>
-              <p className={styles.statLabel}>Followers</p>
-              <p className={styles.statValue}>{userProfile.followers ? userProfile.followers.total : null}</p>
+              <p className={classes.statLabel}>Followers</p>
+              <p className={classes.statValue}>{userProfile.followers ? userProfile.followers.total : null}</p>
             </Box>
             <Box p={2} flex={'auto'} className={borderedGridStyles.item}>
-              <p className={styles.statLabel}>Following</p>
-              <p className={styles.statValue}>12</p>
+              <p className={classes.statLabel}>Following</p>
+              <p className={classes.statValue}>12</p>
             </Box>
           </Box>
         </Card>
       </div>
       <div className="bottomWrapper">
-        <div className="playlists">
-          <Playlist />
+        <div className={classes.buttons}>
+          <div className="playlists">
+              <ButtonGroup size="small" color="primary" aria-label="small outlined button group">
+                <Button onClick={SongsRender}>My Top Songs</Button>
+                <Button onClick={ArtistRender}>My Top Artists</Button>
+                <Button onClick={PlaylistRender}>My Playlists</Button>
+              </ButtonGroup>
+            { (viewRender == 'Playlist') ?  <Playlist /> :
+              (viewRender == 'Songs') ? <TopSongs /> :
+              (viewRender == 'Artists') ? <Artists /> : <h1>Click on the tab you want</h1>
+            }
+          </div>
         </div>
-        <div className="topSongs">
-          <TopSongs />
+        <div className="display">
+          <h1>Hello</h1>
         </div>
       </div>
     </div> 
   );
 };
-
-export default ProfileCard;

@@ -1,13 +1,17 @@
 .profile {
   background-color: black;
-  height: 94vh;
+  height: 100vh;
 }
 
 .playlists {
+  height: 72vh;
+  border: 2px solid #01FFFF;
+  border-radius: 5px;
+  margin: 1px;
   width: 50vw;
 }
 
-.topSongs {
+.display {
   width: 48.7vw;
 }
 
