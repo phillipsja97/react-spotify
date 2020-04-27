@@ -32,6 +32,7 @@ class Auth extends React.Component {
        e = r.exec(q);
     }
     return hashParams;
+    console.log('hi', hashParams);
   }
   render() {
     const { authed } = this.state;

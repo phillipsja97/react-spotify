@@ -4,6 +4,8 @@ import List from '@material-ui/core/List';
 import ListRow from '../ListRow/ListRow';
 import spotifyWebApi from 'spotify-web-api-js';
 import CardHeader from '@material-ui/core/CardHeader';
+import Button from '@material-ui/core/Button';
+import ButtonGroup from '@material-ui/core/ButtonGroup';
 import './UserCard.scss';
 
 
@@ -36,13 +38,11 @@ export default function FolderList() {
   }, []);
 
   return (
-    <div className="userPlaylists">
-      <div className="header">
-        <CardHeader
+      <div className="userPlaylists">
+          <CardHeader
           title="My Playlists"
           className={classes.header}
         />
-      </div>
       <div className="scroll">
         <List>
           { (playlists.items) ? playlists.items.map((playlist) => <ListRow key={playlist.id} playlist={playlist} />) : null }

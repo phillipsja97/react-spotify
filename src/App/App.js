@@ -22,7 +22,8 @@ class App extends React.Component {
     }
     this.state = {
       authed: token ? true : false,
-      nowPlaying: { name: 'Not Checked', albumArt: '' }
+      nowPlaying: { name: 'Not Checked', albumArt: '' },
+      theToken: token,
     }
   }
   getHashParams() {
@@ -38,31 +39,20 @@ class App extends React.Component {
   }
   
   render() {
-    const { authed } = this.state;
-    // if (authed) {
+    const { authed, theToken } = this.state;
+    console.log(theToken, "token");
       return (
         <div className="App">
         <Router>
-          <NavBar authed={authed}/>
+          <NavBar authed={authed} theToken={theToken} />
             <Switch>
-              <Route path="/" exact component={Auth} authed={authed} />
-              <Route path="/Profile" exact component={Profile} authed={authed} />
+              <Route path="/" exact component={Auth} authed={authed} theToken={theToken} />
+              <Route path="/Profile" exact component={Profile} authed={authed} theToken={theToken} />
             </Switch>
         </Router>
     </div>
       );
-    // } else {
-    //   return (
-    //     <div className="App">
-    //     <Router>
-    //             <Switch>
-    //               <Route path="/" exact component={Auth} authed={authed}/>
-    //             </Switch>
-    //     </Router>
-    // </div>
-    //   )
     }
-  // }
 }
 
 export default App;

@@ -2,10 +2,9 @@ import React, { useState, useEffect } from 'react';
 import CardHeader from '@material-ui/core/CardHeader';
 import { makeStyles } from '@material-ui/core/styles';
 import spotifyWebApi from 'spotify-web-api-js';
-import Tracks from '../Tracks/Tracks';
+import ArtistList from '../ArtistList/ArtistList';
 import List from '@material-ui/core/List';
-import ListRow from '../ListRow/ListRow';
-import './TopSongs.scss';
+import './Artists.scss';
 
 const spotifyApi = new spotifyWebApi();
 
@@ -18,29 +17,29 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function TopSongs() {
+export default function TopArtists() {
   const classes = useStyles();
-  const [topSongs, setTopSongs] = useState({})
+  const [topArtists, setTopArtists] = useState({})
 
   useEffect(() => {
-    spotifyApi.getMyTopTracks()
+    spotifyApi.getMyTopArtists()
     .then((response) => {
-      setTopSongs(response);
+      setTopArtists(response);
     })
-    console.log(topSongs, "topSongs");
+    console.log(topArtists, 'topArtists')
   }, []);
 
   return (
     <div className="songs">
        <div className="header">
         <CardHeader
-          title="My Top Songs"
+          title="My Top Artists"
           className={classes.header}
         />
        </div>
       <div className="scroll">
         <List>
-      { (topSongs.items) ? topSongs.items.map((songs) => <Tracks key={songs.id} songs={songs} />) : null }
+      { (topArtists.items) ? topArtists.items.map((artists) => <ArtistList key={artists.id} artists={artists} />) : null }
         </List>
       </div>
     </div>
