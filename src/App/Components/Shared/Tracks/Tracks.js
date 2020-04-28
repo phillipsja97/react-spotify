@@ -7,7 +7,7 @@ import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import LibraryMusic from '@material-ui/icons/LibraryMusic';
 import Typography from '@material-ui/core/typography';
-import { Context } from '../../../../MusicPlayerContext';
+import { Context } from '../../../Helpers/Store/Store';
 
 const useStyles = makeStyles((theme) => ({
   text: {
@@ -41,7 +41,7 @@ const ListRow = props => {
              primary={songs.songs.name}
              secondary={<Typography className={classes.secondaryText}>{songs.songs.artists[0].name}</Typography>}
              />
-          <IconButton aria-label="github" id={songs.id} onClick={() => dispatch({ type: "loadSong", payload: songId() })}>
+          <IconButton aria-label="github" id={songs.id} onClick={() => dispatch({type: "loadSong", payload:  songId()})}>
              <LibraryMusic fontSize="large"  style={ { fill: '#FFB3FD' } }/>
           </IconButton>
     </ListItem>

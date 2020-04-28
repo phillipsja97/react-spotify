@@ -27,7 +27,6 @@ export default function TopSongs() {
     .then((response) => {
       setTopSongs(response);
     })
-    console.log(topSongs, "topSongs");
   }, []);
 
   return (

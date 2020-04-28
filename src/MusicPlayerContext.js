@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const initialState = { currentSong: "" };
+export const initialState = { currentSong: "4bjtZKgF536nUQIrGFrDc4" };
 
 export const reducer = (state, action) => {
   switch (action.type) {
@@ -12,6 +12,3 @@ export const reducer = (state, action) => {
 };
 
 export const Context = React.createContext();
-
-
-

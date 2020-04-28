@@ -1,26 +1,15 @@
-// import React, { useReducer } from 'react';
+import React from 'react';
 
-// const initialState = { currentSong: '' };
+export const initialState = { currentSong: "73gesq6rZOfhlsSEzDu3lc" };
 
-// const store = React.createContext();
+export const Context = React.createContext();
 
-// const { Provider } = store;
-
-// export default function contextProvider({ children }) {
-//   const reducer = (state, action) => {
-//   switch (action.action) {
-//     case "Song": 
-//       return {
-//         ...state,
-//         currentSong: action.payload,
-//       }
-//       break;
-//       default:
-//         throw Error;
-//           break;
-//     }
-//   }
-//   const [state, dispatch] = useReducer(reducer, initialState);
-//   return <Provider value={{ state, dispatch }}>{children}</Provider>
-// }
+export const reducer = (state, action) =>{
+  switch (action.type) {
+    case "loadSong":
+      return { currentSong: action.payload }
+    default:
+      return state
+  }
+};
 

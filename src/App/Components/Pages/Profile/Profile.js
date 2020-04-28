@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useReducer, useContext } from 'react';
+import React, { useEffect, useState, useReducer } from 'react';
 import cx from 'clsx';
 import { makeStyles } from '@material-ui/styles';
 import Box from '@material-ui/core/Box';
@@ -15,11 +15,9 @@ import Playlist from '../../Shared/UserCard/UserCard';
 import TopSongs from '../../Shared/TopSongs/TopSongs';
 import Artists from '../../Shared/Arists/Artists';
 import Player from '../../Shared/Player/Player';
-import { 
-  Context, 
-  initialState, 
-  reducer 
-} from '../../../../MusicPlayerContext';
+import { Context, reducer, initialState } from '../../../Helpers/Store/Store';
+// import reducer from '../../../Helpers/Store/Store';
+// import initialState from '../../../Helpers/Store/Store';
 import './Profile.scss';
 
 const spotifyApi = new spotifyWebApi()
@@ -107,9 +105,12 @@ export default function ProfileCard() {
     setViewRender('Artists');
   }
 
-
   return (
-    <Context.Provider value={{ store, dispatch }}>
+    <Context.Provider 
+      value={{
+        store,
+        dispatch
+      }}>
       <div className="profile">
         <div className="profileHeader">
           <Card className={cx(classes.card, shadowStyles.root)}>
