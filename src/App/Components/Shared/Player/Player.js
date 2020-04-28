@@ -66,7 +66,7 @@ export default function MediaControlCard() {
       console.log(store.currentSong);
       console.log(playSong.id, "IDDDDDDD")
       })
-  }, [playSong.id]);
+  }, [store.currentSong]);
 
   // const artistName = () => {
   //   const Name = 
