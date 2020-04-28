@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useReducer, useContext } from 'react';
 import cx from 'clsx';
 import { makeStyles } from '@material-ui/styles';
 import Box from '@material-ui/core/Box';
@@ -14,6 +14,12 @@ import spotifyWebApi from 'spotify-web-api-js';
 import Playlist from '../../Shared/UserCard/UserCard';
 import TopSongs from '../../Shared/TopSongs/TopSongs';
 import Artists from '../../Shared/Arists/Artists';
+import Player from '../../Shared/Player/Player';
+import { 
+  Context, 
+  initialState, 
+  reducer 
+} from '../../../../MusicPlayerContext';
 import './Profile.scss';
 
 const spotifyApi = new spotifyWebApi()
@@ -80,6 +86,7 @@ export default function ProfileCard() {
   });
   const [userProfile, setUserProfile] = useState({});
   const [viewRender, setViewRender] = useState('');
+  const [store, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
     spotifyApi.getMe()
@@ -102,45 +109,47 @@ export default function ProfileCard() {
 
 
   return (
-    <div className="profile">
-      <div className="profileHeader">
-        <Card className={cx(classes.card, shadowStyles.root)}>
-          <CardContent>
-            <Avatar className={classes.avatar} src={userProfile.images ? userProfile.images[0].url : null} />
-            <h3 className={classes.heading}>{userProfile.display_name}</h3>
-            <span className={classes.subheader}>{userProfile.country}</span>
-          </CardContent>
-          <Divider light />
-          <Box display={'flex'}>
-            <Box p={2} flex={'auto'} className={borderedGridStyles.item}>
-              <p className={classes.statLabel}>Followers</p>
-              <p className={classes.statValue}>{userProfile.followers ? userProfile.followers.total : null}</p>
+    <Context.Provider value={{ store, dispatch }}>
+      <div className="profile">
+        <div className="profileHeader">
+          <Card className={cx(classes.card, shadowStyles.root)}>
+            <CardContent>
+              <Avatar className={classes.avatar} src={userProfile.images ? userProfile.images[0].url : null} />
+              <h3 className={classes.heading}>{userProfile.display_name}</h3>
+              <span className={classes.subheader}>{userProfile.country}</span>
+            </CardContent>
+            <Divider light />
+            <Box display={'flex'}>
+              <Box p={2} flex={'auto'} className={borderedGridStyles.item}>
+                <p className={classes.statLabel}>Followers</p>
+                <p className={classes.statValue}>{userProfile.followers ? userProfile.followers.total : null}</p>
+              </Box>
+              <Box p={2} flex={'auto'} className={borderedGridStyles.item}>
+                <p className={classes.statLabel}>Following</p>
+                <p className={classes.statValue}>12</p>
+              </Box>
             </Box>
-            <Box p={2} flex={'auto'} className={borderedGridStyles.item}>
-              <p className={classes.statLabel}>Following</p>
-              <p className={classes.statValue}>12</p>
-            </Box>
-          </Box>
-        </Card>
-      </div>
-      <div className="bottomWrapper">
-        <div className={classes.buttons}>
-          <div className="playlists">
-              <ButtonGroup size="small" color="primary" aria-label="small outlined button group">
-                <Button onClick={SongsRender}>My Top Songs</Button>
-                <Button onClick={ArtistRender}>My Top Artists</Button>
-                <Button onClick={PlaylistRender}>My Playlists</Button>
-              </ButtonGroup>
-            { (viewRender == 'Playlist') ?  <Playlist /> :
-              (viewRender == 'Songs') ? <TopSongs /> :
-              (viewRender == 'Artists') ? <Artists /> : <h1>Click on the tab you want</h1>
-            }
+          </Card>
+        </div>
+        <div className="bottomWrapper">
+          <div className={classes.buttons}>
+            <div className="playlists">
+                <ButtonGroup size="small" color="primary" aria-label="small outlined button group">
+                  <Button onClick={SongsRender}>My Top Songs</Button>
+                  <Button onClick={ArtistRender}>My Top Artists</Button>
+                  <Button onClick={PlaylistRender}>My Playlists</Button>
+                </ButtonGroup>
+              { (viewRender == 'Playlist') ?  <Playlist /> :
+                (viewRender == 'Songs') ? <TopSongs /> :
+                (viewRender == 'Artists') ? <Artists /> : <h1>Click on the tab you want</h1>
+              }
+            </div>
+          </div>
+          <div className="display">
+            <Player />
           </div>
         </div>
-        <div className="display">
-          <h1>Hello</h1>
-        </div>
       </div>
-    </div> 
+    </Context.Provider>
   );
 };
