@@ -89,7 +89,7 @@ export default function MediaControlCard() {
 
     const handleScriptLoad = () => new Promise((resolve, reject) => {
       window.onSpotifyWebPlaybackSDKReady = () => {
-        const token = theToken;
+        const token = spotifyApi.getAccessToken();
         const player = new window.Spotify.Player({
           name: 'Web Playback SDK Quick Start Player',
           getOAuthToken: cb => { cb(token); }
@@ -98,6 +98,7 @@ export default function MediaControlCard() {
             if (success) {
               console.log('The Web Playback SDK successfully connected to Spotify!');
             }
+            console.log(deviceId, "devices2");
           }))
         }
     })
