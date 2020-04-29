@@ -40,7 +40,6 @@ class App extends React.Component {
   
   render() {
     const { authed, theToken } = this.state;
-    console.log(theToken, "token");
       return (
         <div className="App">
         <Router>

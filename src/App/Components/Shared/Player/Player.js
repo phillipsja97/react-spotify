@@ -10,6 +10,7 @@ import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import SkipNextIcon from '@material-ui/icons/SkipNext';
 import spotifyWebApi from 'spotify-web-api-js';
 import { Context } from '../../../Helpers/Store/Store';
+import Script from 'react-load-script'
 
 const spotifyApi = new spotifyWebApi();
 
@@ -54,7 +55,8 @@ export default function MediaControlCard() {
   const [songTitle, setSongTitle] = useState("");
   const [artistName, setArtistName] = useState("");
   const [albumImage, setAlbumImage] = useState("");
-  const { store } = useContext(Context);
+  const [deviceId, getDeviceId] = useState("");
+  const { store, theToken } = useContext(Context);
 
   useEffect(() => {
     spotifyApi.getTrack( store.currentSong )
@@ -63,16 +65,49 @@ export default function MediaControlCard() {
       setSongTitle(response.name)
       setArtistName(response.artists[0].name);
       setAlbumImage(response.album.images[0].url)
-      console.log(store.currentSong);
-      console.log(playSong.id, "IDDDDDDD")
       })
+    spotifyApi.getMyDevices()
+    .then((response) => {
+      getDeviceId(response.devices.map((d) => d.id));
+      console.log(response, "devices");
+    })
   }, [store.currentSong]);
 
-  // const artistName = () => {
-  //   const Name = 
-  // }
+  // const handleScriptLoad = () => {
+  //     return new Promise(resolve => {
+  //       if (window.Spotify) {
+  //         const token = theToken;
+  //         const player = new window.Spotify.Player({      // Spotify is not defined until 
+  //           name: 'Spotify Web Player',            // the script is loaded in 
+  //           getOAuthToken: cb => { cb(token) }
+  //         })
+  //         resolve(player.connect())
+  //         console.log(player, "2nd console.log");
+  //     }
+  //   }
+  // )}
+
+    const handleScriptLoad = () => new Promise((resolve, reject) => {
+      window.onSpotifyWebPlaybackSDKReady = () => {
+        const token = theToken;
+        const player = new window.Spotify.Player({
+          name: 'Web Playback SDK Quick Start Player',
+          getOAuthToken: cb => { cb(token); }
+        });
+          resolve(player.connect().then(success => {
+            if (success) {
+              console.log('The Web Playback SDK successfully connected to Spotify!');
+            }
+          }))
+        }
+    })
 
   return (
+    <div className="player">
+    <Script 
+      url="https://sdk.scdn.co/spotify-player.js" 
+      onLoad={handleScriptLoad}
+    />
     <Card className={classes.root}>
       <div className={classes.details}>
         <CardContent className={classes.content}>
@@ -101,5 +136,6 @@ export default function MediaControlCard() {
         title="Live from space album cover"
       />
     </Card>
+    </div>
   );
 }

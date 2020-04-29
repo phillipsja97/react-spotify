@@ -8,6 +8,9 @@ import IconButton from '@material-ui/core/IconButton';
 import LibraryMusic from '@material-ui/icons/LibraryMusic';
 import Typography from '@material-ui/core/typography';
 import { Context } from '../../../Helpers/Store/Store';
+import spotifyWebApi from 'spotify-web-api-js';
+
+const spotifyApi = new spotifyWebApi();
 
 const useStyles = makeStyles((theme) => ({
   text: {
@@ -29,7 +32,6 @@ const ListRow = props => {
 
   const songId = () => {
     return songs.songs.id;
-    console.log(songs.id, 'songsID');
   }
 
   return (
