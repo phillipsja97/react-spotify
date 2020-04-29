@@ -16,8 +16,6 @@ import TopSongs from '../../Shared/TopSongs/TopSongs';
 import Artists from '../../Shared/Arists/Artists';
 import Player from '../../Shared/Player/Player';
 import { Context, reducer, initialState } from '../../../Helpers/Store/Store';
-// import reducer from '../../../Helpers/Store/Store';
-// import initialState from '../../../Helpers/Store/Store';
 import './Profile.scss';
 
 const spotifyApi = new spotifyWebApi()
@@ -75,7 +73,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 
-export default function ProfileCard() {
+export default function ProfileCard(props) {
   const classes = useStyles();
   const shadowStyles = useFadedShadowStyles();
   const borderedGridStyles = useGutterBorderedGridStyles({
@@ -84,6 +82,7 @@ export default function ProfileCard() {
   });
   const [userProfile, setUserProfile] = useState({});
   const [viewRender, setViewRender] = useState('');
+  const [theToken, setTheToken] = useState();
   const [store, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
@@ -91,6 +90,9 @@ export default function ProfileCard() {
     .then((response) => {
       setUserProfile(response);
     })
+    const access = window.location.hash.split("#access_token=")[1];
+    const token = access.split("&refresh_token=")[0];
+    setTheToken(token);
   }, [userProfile.display_name]);
 
   const PlaylistRender = (e) => {
@@ -109,7 +111,8 @@ export default function ProfileCard() {
     <Context.Provider 
       value={{
         store,
-        dispatch
+        dispatch,
+        theToken
       }}>
       <div className="profile">
         <div className="profileHeader">

@@ -10,6 +10,8 @@ import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import SkipNextIcon from '@material-ui/icons/SkipNext';
 import spotifyWebApi from 'spotify-web-api-js';
 import { Context } from '../../../Helpers/Store/Store';
+import styled from '@emotion/styled';
+import './Player.scss';
 
 const spotifyApi = new spotifyWebApi();
 
@@ -54,52 +56,40 @@ export default function MediaControlCard() {
   const [songTitle, setSongTitle] = useState("");
   const [artistName, setArtistName] = useState("");
   const [albumImage, setAlbumImage] = useState("");
-  const { store } = useContext(Context);
+  const [deviceId, setDeviceId] = useState("");
+  const [trackUri, setTrackUri] = useState("");
+  const { store, theToken } = useContext(Context);
 
   useEffect(() => {
     spotifyApi.getTrack( store.currentSong )
     .then((response) => {
+      setTrackUri(response.uri);
       setPlaySong(response)
       setSongTitle(response.name)
       setArtistName(response.artists[0].name);
       setAlbumImage(response.album.images[0].url)
-      console.log(store.currentSong);
-      console.log(playSong.id, "IDDDDDDD")
       })
   }, [store.currentSong]);
 
-  // const artistName = () => {
-  //   const Name = 
-  // }
+
+    const Frame = styled('div')`
+      border-radius: 1em;
+    `;
 
   return (
-    <Card className={classes.root}>
-      <div className={classes.details}>
-        <CardContent className={classes.content}>
-          <Typography component="h5" variant="h5" className={classes.color}>
-            {songTitle}
-          </Typography>
-          <Typography variant="subtitle1" color="textSecondary" className={classes.color}>
-            {artistName}
-          </Typography>
-        </CardContent>
-        <div className={classes.controls}>
-          <IconButton aria-label="previous" className={classes.color}>
-            {theme.direction === 'rtl' ? <SkipNextIcon /> : <SkipPreviousIcon />}
-          </IconButton>
-          <IconButton aria-label="play/pause">
-            <PlayArrowIcon className={classes.playIcon} />
-          </IconButton>
-          <IconButton aria-label="next" className={classes.color}>
-            {theme.direction === 'rtl' ? <SkipPreviousIcon /> : <SkipNextIcon />}
-          </IconButton>
-        </div>
-      </div>
-      <CardMedia
-        className={classes.cover}
-        image={albumImage}
-        title="Live from space album cover"
-      />
-    </Card>
+    <div className="player">
+      <Frame>
+        <iframe
+          title={trackUri}
+          className="embed-container"
+          src={'https://open.spotify.com/embed?uri=' + trackUri}
+          frameBorder="0"
+          allowtransparency="true"
+          width='100%'
+          height='100%'
+          allow="encrypted-media">
+        </iframe>
+      </Frame>
+    </div>
   );
 }
