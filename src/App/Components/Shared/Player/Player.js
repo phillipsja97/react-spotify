@@ -10,7 +10,8 @@ import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import SkipNextIcon from '@material-ui/icons/SkipNext';
 import spotifyWebApi from 'spotify-web-api-js';
 import { Context } from '../../../Helpers/Store/Store';
-import Script from 'react-load-script'
+import Script from 'react-load-script';
+import styled from '@emotion/styled';
 
 const spotifyApi = new spotifyWebApi();
 
@@ -55,37 +56,21 @@ export default function MediaControlCard() {
   const [songTitle, setSongTitle] = useState("");
   const [artistName, setArtistName] = useState("");
   const [albumImage, setAlbumImage] = useState("");
-  const [deviceId, getDeviceId] = useState("");
+  const [deviceId, setDeviceId] = useState("");
+  const [uri, setUri] = useState("");
   const { store, theToken } = useContext(Context);
 
   useEffect(() => {
     spotifyApi.getTrack( store.currentSong )
     .then((response) => {
+      setUri(response.uri);
       setPlaySong(response)
       setSongTitle(response.name)
       setArtistName(response.artists[0].name);
       setAlbumImage(response.album.images[0].url)
       })
-    spotifyApi.getMyDevices()
-    .then((response) => {
-      getDeviceId(response.devices.map((d) => d.id));
-      console.log(response, "devices");
-    })
+    spotifyApi.play({ uri })
   }, [store.currentSong]);
-
-  // const handleScriptLoad = () => {
-  //     return new Promise(resolve => {
-  //       if (window.Spotify) {
-  //         const token = theToken;
-  //         const player = new window.Spotify.Player({      // Spotify is not defined until 
-  //           name: 'Spotify Web Player',            // the script is loaded in 
-  //           getOAuthToken: cb => { cb(token) }
-  //         })
-  //         resolve(player.connect())
-  //         console.log(player, "2nd console.log");
-  //     }
-  //   }
-  // )}
 
     const handleScriptLoad = () => new Promise((resolve, reject) => {
       window.onSpotifyWebPlaybackSDKReady = () => {
@@ -94,14 +79,26 @@ export default function MediaControlCard() {
           name: 'Web Playback SDK Quick Start Player',
           getOAuthToken: cb => { cb(token); }
         });
+
           resolve(player.connect().then(success => {
             if (success) {
               console.log('The Web Playback SDK successfully connected to Spotify!');
+              player.on('ready', ({ device_id }) => {
+                console.log('The Web Playback SDK is ready to play music!');
+                setDeviceId(device_id)
+                console.log('Device ID', device_id);
+              })
             }
-            console.log(deviceId, "devices2");
+            const device = spotifyApi.getMyDevices()
+            console.log(device);
           }))
         }
     })
+
+    const Frame = styled('div')`
+      border-radius: 1em;
+      overflow: hidden;
+    `;
 
   return (
     <div className="player">
@@ -109,7 +106,18 @@ export default function MediaControlCard() {
       url="https://sdk.scdn.co/spotify-player.js" 
       onLoad={handleScriptLoad}
     />
-    <Card className={classes.root}>
+    <Frame>
+    <iframe
+      title={uri}
+      src={'https://open.spotify.com/embed?uri=' + uri}
+      frameBorder="0"
+      allowtransparency="true"
+      width='100%'
+      height='100%'
+      allow="encrypted-media">
+    </iframe>
+  </Frame>
+    {/* <Card className={classes.root}>
       <div className={classes.details}>
         <CardContent className={classes.content}>
           <Typography component="h5" variant="h5" className={classes.color}>
@@ -136,7 +144,7 @@ export default function MediaControlCard() {
         image={albumImage}
         title="Live from space album cover"
       />
-    </Card>
+    </Card> */}
     </div>
   );
 }
