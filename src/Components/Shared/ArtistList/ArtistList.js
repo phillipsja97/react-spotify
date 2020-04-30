@@ -6,7 +6,8 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import LibraryMusic from '@material-ui/icons/LibraryMusic';
-import Typography from '@material-ui/core/typography'
+import Typography from '@material-ui/core/typography';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   text: {
@@ -34,9 +35,11 @@ const ListRow = props => {
              primary={artists.artists.name}
              secondary={<Typography className={classes.secondaryText}>{artists.artists.name}</Typography>}
              />
-          <IconButton aria-label="github" onClick={() => alert('Soon to be jammin')}>
-             <LibraryMusic fontSize="large" style={ { fill: '#FFB3FD' } }/>
-          </IconButton>
+          <Link to={`/artists/${artists.artists.id}/albums`}>
+            <IconButton aria-label="github">
+              <LibraryMusic fontSize="large" style={ { fill: '#FFB3FD' } }/>
+            </IconButton>
+          </Link>
     </ListItem>
   )
 }

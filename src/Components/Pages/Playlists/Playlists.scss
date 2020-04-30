@@ -2,3 +2,19 @@
   background-color: black;
   height: 100%;
 }
+
+.container {
+  display: block;
+  justify-content: center;
+  align-items: center;
+}
+
+.listContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 10em;
+  margin-right: 10em;
+  border: 1px solid #01FFFF;
+  margin-top: 2em;
+}

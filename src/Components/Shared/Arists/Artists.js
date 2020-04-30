@@ -14,6 +14,16 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     color: '#FFB3FD',
     borderBottom: '1px solid #FFB3FD'
+  },
+  songsContainer: {
+    backgroundColor: 'black',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: '100%',
+  },
+  scrollContainer: {
+    marginRight: '12em',
+    marginLeft: '12em',
   }
 }));
 
@@ -22,7 +32,10 @@ export default function TopArtists() {
   const [topArtists, setTopArtists] = useState({})
 
   useEffect(() => {
-    spotifyApi.getMyTopArtists()
+    spotifyApi.getMyTopArtists({
+      limit: '50',
+      time_range: 'long_term'
+    })
     .then((response) => {
       setTopArtists(response);
     })
@@ -30,14 +43,14 @@ export default function TopArtists() {
   }, []);
 
   return (
-    <div className="songs">
+    <div className="songsContainer">
        <div className="header">
         <CardHeader
           title="My Top Artists"
           className={classes.header}
         />
        </div>
-      <div className="scroll">
+      <div className="scrollContainer">
         <List>
       { (topArtists.items) ? topArtists.items.map((artists) => <ArtistList key={artists.id} artists={artists} />) : null }
         </List>

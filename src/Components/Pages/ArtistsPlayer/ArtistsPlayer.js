@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import CardHeader from '@material-ui/core/CardHeader';
 import { makeStyles } from '@material-ui/core/styles';
 import spotifyWebApi from 'spotify-web-api-js';
-import './PlaylistPlayer.scss';
+import './ArtistsPlayer.scss';
 
 const spotifyApi = new spotifyWebApi();
 
@@ -21,18 +21,18 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function PlaylistPlayer(props) {
+export default function ArtistsPlayer(props) {
   const classes = useStyles();
-  const [playlistName, setPlaylistName] = useState("");
+  const [artistName, setArtistName] = useState("");
 
     const Frame = styled('div')`
       border-radius: 1em;
     `;
 
     useEffect(() => {
-      spotifyApi.getPlaylist(props.match.params.id)
+      spotifyApi.getArtist(props.match.params.id)
       .then((response) => {
-        setPlaylistName(response.name);
+        setArtistName(response.name);
       })
     })
 
@@ -40,14 +40,14 @@ export default function PlaylistPlayer(props) {
     <div className="player">
       <div className="container">
         <CardHeader
-        title={playlistName}
+        title={artistName}
         className={classes.header}
           />
       </div>
         <div className="playerContainer">
             <Frame>
             <iframe 
-            src={'https://open.spotify.com/embed/playlist/' + props.match.params.id}
+            src={'https://open.spotify.com/embed/artists/' + props.match.params.id}
             width="800" 
             height="880" 
             frameborder="0" 

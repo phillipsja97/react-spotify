@@ -11,6 +11,9 @@ import Auth from '../Components/Pages/Auth/Auth';
 import { Context, reducer, initialState } from '../Helpers/Store/Store';
 import Playlists from '../Components/Pages/Playlists/Playlists';
 import PlaylistPlayer from '../Components/Pages/PlaylistPlayer/PlaylistPlayer';
+import Artists from '../Components/Shared/Arists/Artists';
+import ArtistsPlayer from '../Components/Pages/ArtistsPlayer/ArtistsPlayer';
+import ArtistAlbums from '../Components/Pages/ArtistsAlbums/ArtistAlbums';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const spotifyApi = new SpotifyWebApi();
@@ -57,6 +60,9 @@ class App extends React.Component {
                 <PrivateRoute path="/" exact component={Profile} authed={authed} theToken={theToken} />
                 <PrivateRoute path="/playlists" exact component={Playlists} authed={authed} />
                 <PrivateRoute path="/playlists/:id" exact component={PlaylistPlayer} authed={authed} />
+                <PrivateRoute path="/artists" exact component={Artists} authed={authed} />
+                <PrivateRoute path="/artists/:id/albums" exact component={ArtistAlbums} authed={authed} />
+                <PrivateRoute path="/artists/:id/albums/:albumId" exact component={ArtistsPlayer} authed={authed} />
               </Switch>
           </Router>
         </div>
