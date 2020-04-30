@@ -19,10 +19,12 @@ class NavBar extends React.Component {
     const { authed } = this.props;
     return (
     <Navbar bg="dark" variant="dark">
+      <Link className="nav-link" to="/">
       <Navbar.Brand href="#home">Spotify Dashboard</Navbar.Brand>
+      </Link>
         <Nav className="mr-auto">
-          <Link className="nav-link" to="/playlists">Playlists</Link>
-          <Link className="nav-link" to="/artists">Artists</Link>
+          <Link className="nav-link" to="/playlists">My Playlists</Link>
+          <Link className="nav-link" to="/artists">My Top Artists</Link>
         </Nav>
     </Navbar>
     );

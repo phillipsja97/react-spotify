@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
+import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -7,8 +8,8 @@ import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import LibraryMusic from '@material-ui/icons/LibraryMusic';
 import Typography from '@material-ui/core/typography';
-import { Context } from '../../../Helpers/Store/Store';
 import spotifyWebApi from 'spotify-web-api-js';
+import { Context } from '../../../Helpers/Store/Store';
 
 const spotifyApi = new spotifyWebApi();
 
@@ -43,9 +44,9 @@ const ListRow = props => {
              primary={songs.songs.name}
              secondary={<Typography className={classes.secondaryText}>{songs.songs.artists[0].name}</Typography>}
              />
-          <IconButton aria-label="github" id={songs.id} onClick={() => dispatch({type: "loadSong", payload:  songId()})}>
-             <LibraryMusic fontSize="large"  style={ { fill: '#FFB3FD' } }/>
-          </IconButton>
+            <IconButton aria-label="github">
+              <LibraryMusic fontSize="large" style={ { fill: '#FFB3FD' } } onClick={() => dispatch({type: "loadSong", payload:  songId()})}/>
+            </IconButton>
     </ListItem>
   )
 }

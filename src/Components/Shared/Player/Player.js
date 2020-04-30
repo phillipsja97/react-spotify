@@ -79,16 +79,15 @@ export default function MediaControlCard() {
   return (
     <div className="player">
       <Frame>
-        <iframe
-          title={trackUri}
-          className="embed-container"
-          src={'https://open.spotify.com/embed?uri=' + trackUri}
-          frameBorder="0"
-          allowtransparency="true"
-          width='100%'
-          height='100%'
-          allow="encrypted-media">
-        </iframe>
+      <iframe
+      src={'https://open.spotify.com/embed/track/' + store.currentSong}
+      width="540"
+      height="520"
+      frameborder="0"
+      allowtransparency="true"
+      allow="encrypted-media"
+      >
+    </iframe>
       </Frame>
     </div>
   );

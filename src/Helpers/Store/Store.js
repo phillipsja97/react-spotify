@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
+import spotifyWebApi from 'spotify-web-api-js';
 
-export const initialState = { currentSong: "73gesq6rZOfhlsSEzDu3lc" };
+export const initialState = { currentSong: "" };
 
 export const Context = React.createContext();
 
