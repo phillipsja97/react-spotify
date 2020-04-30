@@ -9,6 +9,13 @@
   align-items: center;
 }
 
+.full {
+  height: 100vh;
+  display: flex;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
 .listContainer {
   display: flex;
   justify-content: center;

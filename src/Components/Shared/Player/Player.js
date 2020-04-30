@@ -78,17 +78,20 @@ export default function MediaControlCard() {
 
   return (
     <div className="player">
-      <Frame>
-      <iframe
-      src={'https://open.spotify.com/embed/track/' + store.currentSong}
-      width="540"
-      height="520"
-      frameborder="0"
-      allowtransparency="true"
-      allow="encrypted-media"
-      >
-    </iframe>
-      </Frame>
-    </div>
-  );
+    { (!store.currentSong) ? <div className="full"><img src="https://github.com/phillipsja97/react-spotify/blob/master/src/Assets/music_loading.gif?raw=true" /></div>
+                : 
+                  <Frame>
+                  <iframe
+                  src={'https://open.spotify.com/embed/track/' + store.currentSong}
+                  width="540"
+                  height="520"
+                  frameborder="0"
+                  allowtransparency="true"
+                  allow="encrypted-media"
+                  >
+                </iframe>
+                  </Frame>
+    }
+    </div> 
+  )
 }
