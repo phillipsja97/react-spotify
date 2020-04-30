@@ -82,17 +82,18 @@ export default function ProfileCard(props) {
   });
   const [userProfile, setUserProfile] = useState({});
   const [viewRender, setViewRender] = useState('');
-  const [theToken, setTheToken] = useState();
+  const [theToken, setTheToken] = useState(props);
   const [store, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
-    spotifyApi.getMe()
+    spotifyApi.getMe(theToken)
     .then((response) => {
       setUserProfile(response);
     })
-    const access = window.location.hash.split("#access_token=")[1];
-    const token = access.split("&refresh_token=")[0];
-    setTheToken(token);
+    console.log(props);
+    // const access = window.location.hash.split("#access_token=")[1];
+    // const token = access.split("&refresh_token=")[0];
+    // setTheToken(token);
   }, [userProfile.display_name]);
 
   const PlaylistRender = (e) => {

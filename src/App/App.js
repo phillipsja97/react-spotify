@@ -5,12 +5,20 @@ import {
   Route,
   Switch,
   Redirect } from 'react-router-dom';
-import Profile from './Components/Pages/Profile/Profile';
-import NavBar from './Components/Shared/NavBar/NavBar';
-import Auth from './Components/Pages/Auth/Auth';
+import Profile from '../Components/Pages/Profile/Profile';
+import NavBar from '../Components/Shared/NavBar/NavBar';
+import Auth from '../Components/Pages/Auth/Auth';
+import { Context, reducer, initialState } from '../Helpers/Store/Store';
+import Playlists from '../Components/Pages/Playlists/Playlists';
+import PlaylistPlayer from '../Components/Pages/PlaylistPlayer/PlaylistPlayer';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const spotifyApi = new SpotifyWebApi();
+
+const PrivateRoute = ({ component: Component, authed, ...rest }) => {
+  const routeChecker = (props) => (authed === true ? <Component {...props} {...rest}/> : <Redirect to={{ pathname: '/auth', state: { from: props.location } }} />);
+  return <Route {...rest} render={(props) => routeChecker(props)} />;
+};
 
 class App extends React.Component {
   constructor(){
@@ -42,14 +50,16 @@ class App extends React.Component {
     const { authed, theToken } = this.state;
       return (
         <div className="App">
-        <Router>
-          <NavBar authed={authed} theToken={theToken} />
-            <Switch>
-              <Route path="/" exact component={Auth} authed={authed} theToken={theToken} />
-              <Route path="/Profile" exact component={Profile} authed={authed} theToken={theToken} />
-            </Switch>
-        </Router>
-    </div>
+          <Router>
+            <NavBar authed={authed} theToken={theToken} />
+              <Switch>
+                <Route path="/auth" exact component={Auth} authed={authed} theToken={theToken} />
+                <PrivateRoute path="/" exact component={Profile} authed={authed} theToken={theToken} />
+                <PrivateRoute path="/playlists" exact component={Playlists} authed={authed} />
+                <PrivateRoute path="/playlists/:id" exact component={PlaylistPlayer} authed={authed} />
+              </Switch>
+          </Router>
+        </div>
       );
     }
 }

@@ -18,10 +18,12 @@ class NavBar extends React.Component {
   render() {
     const { authed } = this.props;
     return (
-      <Navbar expand="lg" className="navbar">
-        <Navbar.Brand className="navbar-text">Podcast Heaven</Navbar.Brand>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
-      </Navbar>
+    <Navbar bg="dark" variant="dark">
+      <Navbar.Brand href="#home">Spotify Dashboard</Navbar.Brand>
+        <Nav className="mr-auto">
+          <Link className="nav-link" to="/playlists">Playlists</Link>
+        </Nav>
+    </Navbar>
     );
   }
 }
