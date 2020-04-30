@@ -23,7 +23,10 @@ export default function TopSongs() {
   const [topSongs, setTopSongs] = useState({})
 
   useEffect(() => {
-    spotifyApi.getMyTopTracks()
+    spotifyApi.getMyTopTracks({
+      time_range: 'long_term',
+      limit: '50'
+    })
     .then((response) => {
       setTopSongs(response);
     })

@@ -6,7 +6,8 @@ import spotifyWebApi from 'spotify-web-api-js';
 import CardHeader from '@material-ui/core/CardHeader';
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
-import './Playlists.scss';
+import AlbumList from '../../Shared/AlbumList/AlbumList';
+import './ArtistAlbums.scss';
 
 
 const spotifyApi = new spotifyWebApi();
@@ -25,29 +26,29 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function Playlists() {
+export default function Artists(props) {
   const classes = useStyles();
-    const [playlists, setPlaylists] = useState({})
+    const [albums, setAlbums] = useState({})
 
   useEffect(() => {
-    spotifyApi.getUserPlaylists()
+    spotifyApi.getArtistAlbums(props.match.params.id)
     .then((response) => {
-      setPlaylists(response);
+      setAlbums(response);
     })
-    console.log(playlists, "playlists");
+    console.log(albums, "album");
   }, []);
 
   return (
       <div className="userPlaylists">
         <div className="container">
           <CardHeader
-          title="My Playlists"
+          title="Albums"
           className={classes.header}
         />
         </div>
         <div className="listContainer">
         <List>
-          { (playlists.items) ? playlists.items.map((playlist) => <ListRow key={playlist.id} playlist={playlist} />) : null }
+          { (albums.items) ? albums.items.map((album) => <AlbumList key={album.id} album={album} />) : null }
         </List>
         </div>
         <br/>

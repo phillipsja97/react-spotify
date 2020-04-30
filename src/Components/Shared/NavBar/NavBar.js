@@ -22,6 +22,7 @@ class NavBar extends React.Component {
       <Navbar.Brand href="#home">Spotify Dashboard</Navbar.Brand>
         <Nav className="mr-auto">
           <Link className="nav-link" to="/playlists">Playlists</Link>
+          <Link className="nav-link" to="/artists">Artists</Link>
         </Nav>
     </Navbar>
     );
