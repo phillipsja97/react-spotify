@@ -19,7 +19,7 @@ class Auth extends React.Component {
     }
     this.state = {
       authed: token ? true : false,
-      nowPlaying: { name: 'Not Checked', albumArt: '' }
+      theToken: token,
     }
   }
   getHashParams() {

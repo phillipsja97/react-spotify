@@ -6,6 +6,7 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import LibraryMusic from '@material-ui/icons/LibraryMusic';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   text: {
@@ -28,9 +29,11 @@ const ListRow = props => {
              <Avatar alt="Remy Sharp" variant="square" src={playlist.playlist.images[0].url} />
           </ListItemAvatar>
              <ListItemText className={classes.text} primary={playlist.playlist.name} secondary={playlist.playlist.owner.name} />
-          <IconButton aria-label="github" onClick={() => alert('Soon to be jammin')}>
-             <LibraryMusic fontSize="large" style={ { fill: '#FFB3FD' } }/>
-          </IconButton>
+          <Link to={`/playlists/${playlist.playlist.id}`}>
+            <IconButton aria-label="github">
+              <LibraryMusic fontSize="large" style={ { fill: '#FFB3FD' } }/>
+            </IconButton>
+          </Link>
     </ListItem>
   )
 }

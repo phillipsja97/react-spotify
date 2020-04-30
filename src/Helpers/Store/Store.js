@@ -8,6 +8,8 @@ export const reducer = (state, action) =>{
   switch (action.type) {
     case "loadSong":
       return { currentSong: action.payload }
+    case "loadPlaylist":
+      return { currentPlaylist: action.payload }
     default:
       return state
   }
