@@ -1,12 +1,11 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import CardHeader from '@material-ui/core/CardHeader';
 import { makeStyles } from '@material-ui/core/styles';
 import spotifyWebApi from 'spotify-web-api-js';
-import Tracks from '../Tracks/Tracks';
+import Tracks from '../../Shared/Tracks/Tracks';
 import List from '@material-ui/core/List';
-import ListRow from '../ListRow/ListRow';
-import { Context } from '../../../Helpers/Store/Store';
-import './TopSongs.scss';
+import ListRow from '../../Shared/ListRow/ListRow';
+import './Songs.scss';
 
 const spotifyApi = new spotifyWebApi();
 
@@ -22,7 +21,6 @@ const useStyles = makeStyles((theme) => ({
 export default function TopSongs() {
   const classes = useStyles();
   const [topSongs, setTopSongs] = useState({})
-  const { store, dispatch } = useContext(Context);
 
   useEffect(() => {
     spotifyApi.getMyTopTracks({
@@ -31,7 +29,6 @@ export default function TopSongs() {
     })
     .then((response) => {
       setTopSongs(response);
-      dispatch( {type: "loadSong", payload:  response.items[0].id} )
     })
   }, []);
 
@@ -39,7 +36,7 @@ export default function TopSongs() {
     <div className="songs">
        <div className="header">
         <CardHeader
-          title="Quick Play: My Top Songs"
+          title="My Top Songs"
           className={classes.header}
         />
        </div>

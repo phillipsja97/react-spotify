@@ -1,6 +1,6 @@
 .profile {
   background-color: black;
-  height: 100vh;
+  height: 100%;
 }
 
 .playlists {
@@ -12,11 +12,13 @@
 }
 
 .display {
-  width: 48.7vw;
-  height: 72vh;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  padding: auto;
+  width: 48.6vw;
   border: 2px solid #01FFFF;
   border-radius: 5px;
-  margin: 1px;
 }
 
 .bottomWrapper {

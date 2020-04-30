@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: 12,
     minWidth: 256,
     textAlign: 'center',
-    backgroundColor: '#43464B',
+    backgroundColor: 'black',
     border: '2px solid #01FFFF'
   },
   avatar: {
@@ -137,22 +137,12 @@ export default function ProfileCard(props) {
           </Card>
         </div>
         <div className="bottomWrapper">
-          <div className={classes.buttons}>
             <div className="playlists">
-                <ButtonGroup size="small" color="primary" aria-label="small outlined button group">
-                  <Button onClick={SongsRender}>My Top Songs</Button>
-                  <Button onClick={ArtistRender}>My Top Artists</Button>
-                  <Button onClick={PlaylistRender}>My Playlists</Button>
-                </ButtonGroup>
-              { (viewRender == 'Playlist') ?  <Playlist /> :
-                (viewRender == 'Songs') ? <TopSongs /> :
-                (viewRender == 'Artists') ? <Artists /> : <h1>Click on the tab you want</h1>
-              }
+              <TopSongs />
             </div>
-          </div>
-          <div className="display">
-            <Player />
-          </div>
+            <div className="display">
+              <Player />
+            </div>
         </div>
       </div>
     </Context.Provider>
