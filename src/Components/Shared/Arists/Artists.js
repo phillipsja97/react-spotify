@@ -44,17 +44,26 @@ export default function TopArtists() {
 
   return (
     <div className="songsContainer">
-       <div className="header">
-        <CardHeader
-          title="My Top Artists"
-          className={classes.header}
-        />
-       </div>
-      <div className="scrollContainer">
-        <List>
-      { (topArtists.items) ? topArtists.items.map((artists) => <ArtistList key={artists.id} artists={artists} />) : null }
-        </List>
-      </div>
+    { (topArtists.items)
+      ? 
+        <div className="songsContainer">
+          <div className="header">
+            <CardHeader
+              title="My Top Artists"
+              className={classes.header}
+            />
+          </div>
+          <div className="scrollContainer">
+            <List>
+          { (topArtists.items) ? topArtists.items.map((artists) => <ArtistList key={artists.id} artists={artists} />) : null }
+            </List>
+          </div>
+        </div>
+      : 
+        <div className="full">
+         <img src="https://github.com/phillipsja97/react-spotify/blob/master/src/Assets/music_loading.gif?raw=true" />
+        </div>
+    }
     </div>
   )
 }
