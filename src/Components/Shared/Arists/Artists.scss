@@ -1,17 +1,25 @@
-.songsContainer {
+.artistsContainer {
   background-color: black;
   height: 100%;
 }
 
+.full {
+  height: 100vh;
+  display: flex;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
 .header {
   display: flex;
-  justify-content: center;
+  justify-content: center !important;
   align-items: center;
 }
 
 .scrollContainer {
-  margin-left: 10em;
-  margin-right: 10em;
-  border: 1px solid #01FFFF;
-  margin-top: 2em;
+  display: inline-flex !important;
+  flex-direction: row !important;
+  flex-wrap: wrap !important;
+  justify-content: center;
+  margin: 2em 6em 2em 6em !important;
 }

@@ -3,15 +3,12 @@ import CardHeader from '@material-ui/core/CardHeader';
 import { makeStyles } from '@material-ui/core/styles';
 import spotifyWebApi from 'spotify-web-api-js';
 import ArtistList from '../ArtistList/ArtistList';
-import List from '@material-ui/core/List';
 import './Artists.scss';
 
 const spotifyApi = new spotifyWebApi();
 
 const useStyles = makeStyles((theme) => ({
   header: {
-    justifyContent: 'center',
-    alignItems: 'center',
     color: '#FFB3FD',
     borderBottom: '1px solid #FFB3FD'
   },
@@ -43,10 +40,10 @@ export default function TopArtists() {
   }, []);
 
   return (
-    <div className="songsContainer">
+    <React.Fragment>
     { (topArtists.items)
       ? 
-        <div className="songsContainer">
+        <div className="artistsContainer">
           <div className="header">
             <CardHeader
               title="My Top Artists"
@@ -54,16 +51,14 @@ export default function TopArtists() {
             />
           </div>
           <div className="scrollContainer">
-            <List>
           { (topArtists.items) ? topArtists.items.map((artists) => <ArtistList key={artists.id} artists={artists} />) : null }
-            </List>
           </div>
         </div>
-      : 
+      :
         <div className="full">
          <img src="https://github.com/phillipsja97/react-spotify/blob/master/src/Assets/music_loading.gif?raw=true" />
         </div>
     }
-    </div>
+    </React.Fragment>
   )
 }
