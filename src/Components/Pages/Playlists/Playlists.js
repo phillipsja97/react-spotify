@@ -49,9 +49,7 @@ export default function Playlists() {
             />
             </div>
             <div className="listContainer">
-            <List>
               { (playlists.items) ? playlists.items.map((playlist) => <ListRow key={playlist.id} playlist={playlist} />) : null }
-            </List>
             </div>
             <br/>
         </div>
