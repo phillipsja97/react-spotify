@@ -8,11 +8,9 @@ import {
 import Profile from '../Components/Pages/Profile/Profile';
 import NavBar from '../Components/Shared/NavBar/NavBar';
 import Auth from '../Components/Pages/Auth/Auth';
-import { Context, reducer, initialState } from '../Helpers/Store/Store';
 import Playlists from '../Components/Pages/Playlists/Playlists';
 import PlaylistPlayer from '../Components/Pages/PlaylistPlayer/PlaylistPlayer';
 import Artists from '../Components/Shared/Arists/Artists';
-import ArtistsPlayer from '../Components/Pages/ArtistsPlayer/ArtistsPlayer';
 import ArtistAlbums from '../Components/Pages/ArtistsAlbums/ArtistAlbums';
 import AlbumPlayer from '../Components/Pages/AlbumPlayer/AlbumPlayer';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -49,13 +47,18 @@ class App extends React.Component {
     }
     return hashParams;
   }
+
+  logout = (e) => {
+    e.preventDefault();
+    this.setState({ authed: false });
+  }
   
   render() {
     const { authed, theToken } = this.state;
       return (
         <div className="App">
           <Router>
-            <NavBar authed={authed} theToken={theToken} />
+            <NavBar authed={authed} theToken={theToken} logout={this.logout} />
               <Switch>
                 <Route path="/auth" exact component={Auth} authed={authed} theToken={theToken} />
                 <PrivateRoute path="/" exact component={Profile} authed={authed} theToken={theToken} />

@@ -8,7 +8,6 @@ import TextInfoContent from '@mui-treasury/components/content/textInfo';
 import { useFourThreeCardMediaStyles } from '@mui-treasury/styles/cardMedia/fourThree';
 import { useN04TextInfoContentStyles } from '@mui-treasury/styles/textInfoContent/n04';
 import { useOverShadowStyles } from '@mui-treasury/styles/shadow/over';
-import LibraryMusic from '@material-ui/icons/LibraryMusic';
 import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
@@ -17,10 +16,9 @@ const useStyles = makeStyles((theme) => ({
     minWidth: 300,
     maxHeight: 400,
     minHeight: 400,
-    margin: 'auto',
+    margin: '2em',
     borderRadius: 12,
     padding: 12,
-    margin: '2em',
     backgroundColor: 'black',
     color: '#01FFFF',
   },
@@ -35,11 +33,9 @@ const ListRow = props => {
   const textCardContentStyles = useN04TextInfoContentStyles();
   const shadowStyles = useOverShadowStyles({ inactive: true });
   const [playlist, setPlaylist] = useState(props);
-  const classes = useStyles();
 
   useEffect(() => {
     setPlaylist(props);
-    console.log(playlist);
   }, [props]);
 
   return (

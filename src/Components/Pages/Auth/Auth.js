@@ -1,6 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { Card, Divide } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import ButtonImage from '../../Shared/LoginButtonScreen/LoginButtonScreen';
 import './Auth.scss';
 import SpotifyWebApi from 'spotify-web-api-js';
@@ -11,9 +10,7 @@ class Auth extends React.Component {
   constructor(){
     super();
     const params = this.getHashParams();
-    console.log(params)
     const token = params.access_token;
-    console.log(token);
     if (token) {
       spotifyApi.setAccessToken(token);
     }
@@ -32,10 +29,8 @@ class Auth extends React.Component {
        e = r.exec(q);
     }
     return hashParams;
-    console.log('hi', hashParams);
   }
   render() {
-    const { authed } = this.state;
     return (
       <div className="auth">
               <Card className="text-center" style={{ color: 'white',

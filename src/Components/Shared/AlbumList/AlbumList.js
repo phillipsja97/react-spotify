@@ -7,7 +7,6 @@ import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
-import Typography from '@material-ui/core/Typography';
 import { useCoverCardMediaStyles } from '@mui-treasury/styles/cardMedia/cover';
 import { useLightTopShadowStyles } from '@mui-treasury/styles/shadow/lightTop';
 import './AlbumList.scss';
@@ -45,11 +44,9 @@ export default function AlbumList(props) {
   const mediaStyles = useCoverCardMediaStyles();
   const shadowStyles = useLightTopShadowStyles();
   const [album, setAlbum] = useState(props);
-  const [uniqueAlbum, setUniqueAlbum] = useState({})
 
   useEffect(() => {
     setAlbum(props);
-    console.log(album);
   }, [props]);
 
   return (

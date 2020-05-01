@@ -50,8 +50,8 @@ export default function AlbumPlayer(props) {
             src={'https://open.spotify.com/embed/album/' + props.match.params.albumId}
             width="800" 
             height="880" 
-            frameborder="0" 
             allowtransparency="true" 
+            title="albumPlayer"
             allow="encrypted-media">
             </iframe>
             </Frame>

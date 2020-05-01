@@ -8,12 +8,8 @@ import Avatar from '@material-ui/core/Avatar';
 import Divider from '@material-ui/core/Divider';
 import { useFadedShadowStyles } from '@mui-treasury/styles/shadow/faded';
 import { useGutterBorderedGridStyles } from '@mui-treasury/styles/grid/gutterBordered';
-import Button from '@material-ui/core/Button';
-import ButtonGroup from '@material-ui/core/ButtonGroup';
 import spotifyWebApi from 'spotify-web-api-js';
-import Playlist from '../../Shared/UserCard/UserCard';
 import TopSongs from '../../Shared/TopSongs/TopSongs';
-import Artists from '../../Shared/Arists/Artists';
 import Player from '../../Shared/Player/Player';
 import { Context, reducer, initialState } from '../../../Helpers/Store/Store';
 import './Profile.scss';
@@ -43,7 +39,6 @@ const useStyles = makeStyles((theme) => ({
   },
   subheader: {
     fontSize: 14,
-    color: 'grey',
     marginBottom: '0.875em',
     color: '#01FFC3',
   },
@@ -81,8 +76,7 @@ export default function ProfileCard(props) {
     height: '50%',
   });
   const [userProfile, setUserProfile] = useState({});
-  const [viewRender, setViewRender] = useState('');
-  const [theToken, setTheToken] = useState(props);
+  const [theToken] = useState(props);
   const [store, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
@@ -91,18 +85,6 @@ export default function ProfileCard(props) {
       setUserProfile(response);
     })
   }, [userProfile.display_name]);
-
-  const PlaylistRender = (e) => {
-    setViewRender('Playlist');
-  }
-
-  const SongsRender = (e) => {
-    setViewRender('Songs');
-  }
-
-  const ArtistRender = (e) => {
-    setViewRender('Artists');
-  }
 
   return (
     <Context.Provider 
@@ -137,7 +119,7 @@ export default function ProfileCard(props) {
               <TopSongs />
             </div>
             <div className="display">
-              { (store.currentSong) ? <Player /> : <img src="https://github.com/phillipsja97/react-spotify/blob/master/src/Assets/music_loading.gif?raw=true" /> }
+              { (store.currentSong) ? <Player /> : <img src="https://github.com/phillipsja97/react-spotify/blob/master/src/Assets/music_loading.gif?raw=true" alt="loader" /> }
             </div>
         </div>
       </div>

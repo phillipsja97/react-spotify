@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import spotifyWebApi from 'spotify-web-api-js';
+import React from 'react';
 
 export const initialState = { currentSong: "" };
 

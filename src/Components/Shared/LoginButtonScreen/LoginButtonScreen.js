@@ -9,7 +9,7 @@ const images = [
     url: 'https://cdn0.tnwcdn.com/wp-content/blogs.dir/1/files/2014/02/shutterstock_163052525-730x342.jpg',
     title: 'Login With Spotify',
     width: '30%',
-    href: 'http://localhost:8888'
+    href: 'https://secret-inlet-47298.herokuapp.com/'
   },
 ];
 
@@ -109,7 +109,7 @@ export default function ButtonBases() {
           />
           <span className={classes.imageBackdrop} />
           <span className={classes.imageButton}>
-          <Link href='http://localhost:8888' style={{ textDecoration: 'none', color: '#01FFC3' }}>
+          <Link href='https://secret-inlet-47298.herokuapp.com/' style={{ textDecoration: 'none', color: '#01FFC3' }}>
               <Typography
                 component="span"
                 variant="subtitle1"

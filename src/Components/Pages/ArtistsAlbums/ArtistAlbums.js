@@ -1,11 +1,7 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import List from '@material-ui/core/List';
-import ListRow from '../../Shared/ListRow/ListRow';
 import spotifyWebApi from 'spotify-web-api-js';
 import CardHeader from '@material-ui/core/CardHeader';
-import Button from '@material-ui/core/Button';
-import ButtonGroup from '@material-ui/core/ButtonGroup';
 import AlbumList from '../../Shared/AlbumList/AlbumList';
 import './ArtistAlbums.scss';
 
@@ -36,7 +32,6 @@ export default function Artists(props) {
     .then((response) => {
       setAlbums(response);
     })
-    console.log(albums, "album");
   }, []);
 
   return (
@@ -55,7 +50,7 @@ export default function Artists(props) {
           <br/>
         </div>
       : <div className="full">
-          <img src="https://github.com/phillipsja97/react-spotify/blob/master/src/Assets/music_loading.gif?raw=true" />
+          <img src="https://github.com/phillipsja97/react-spotify/blob/master/src/Assets/music_loading.gif?raw=true" alt="loader" />
         </div>
     }
     </div>

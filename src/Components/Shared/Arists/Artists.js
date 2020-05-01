@@ -36,8 +36,7 @@ export default function TopArtists() {
     .then((response) => {
       setTopArtists(response);
     })
-    console.log(topArtists, 'topArtists')
-  }, []);
+  }, [topArtists]);
 
   return (
     <React.Fragment>
@@ -56,7 +55,7 @@ export default function TopArtists() {
         </div>
       :
         <div className="full">
-         <img src="https://github.com/phillipsja97/react-spotify/blob/master/src/Assets/music_loading.gif?raw=true" />
+         <img src="https://github.com/phillipsja97/react-spotify/blob/master/src/Assets/music_loading.gif?raw=true" alt="loader" />
         </div>
     }
     </React.Fragment>

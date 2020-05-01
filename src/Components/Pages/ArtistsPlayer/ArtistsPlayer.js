@@ -50,7 +50,6 @@ export default function ArtistsPlayer(props) {
             src={'https://open.spotify.com/embed/artists/' + props.match.params.id}
             width="800" 
             height="880" 
-            frameborder="0" 
             allowtransparency="true" 
             allow="encrypted-media">
             </iframe>

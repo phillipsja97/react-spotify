@@ -50,8 +50,8 @@ export default function PlaylistPlayer(props) {
             src={'https://open.spotify.com/embed/playlist/' + props.match.params.id}
             width="800" 
             height="880" 
-            frameborder="0" 
             allowtransparency="true" 
+            title="playlistPlayer"
             allow="encrypted-media">
             </iframe>
             </Frame>

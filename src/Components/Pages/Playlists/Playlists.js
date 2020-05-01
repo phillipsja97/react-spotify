@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import List from '@material-ui/core/List';
 import ListRow from '../../Shared/ListRow/ListRow';
 import spotifyWebApi from 'spotify-web-api-js';
 import CardHeader from '@material-ui/core/CardHeader';
-import Button from '@material-ui/core/Button';
-import ButtonGroup from '@material-ui/core/ButtonGroup';
 import './Playlists.scss';
 
 
@@ -16,6 +13,7 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
     maxWidth: '50vw',
     backgroundColor: theme.palette.background.paper,
+    margin: '2em',
   },
   header: {
     justifyContent: 'center',
@@ -34,7 +32,6 @@ export default function Playlists() {
     .then((response) => {
       setPlaylists(response);
     })
-    console.log(playlists, "playlists");
   }, []);
 
   return (
@@ -54,7 +51,7 @@ export default function Playlists() {
             <br/>
         </div>
       : <div className="full">
-         <img src="https://github.com/phillipsja97/react-spotify/blob/master/src/Assets/music_loading.gif?raw=true" />
+         <img src="https://github.com/phillipsja97/react-spotify/blob/master/src/Assets/music_loading.gif?raw=true" alt="loader" />
         </div>
     }
     </div>

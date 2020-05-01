@@ -4,7 +4,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import spotifyWebApi from 'spotify-web-api-js';
 import Tracks from '../Tracks/Tracks';
 import List from '@material-ui/core/List';
-import ListRow from '../ListRow/ListRow';
 import { Context } from '../../../Helpers/Store/Store';
 import './TopSongs.scss';
 
@@ -22,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
 export default function TopSongs() {
   const classes = useStyles();
   const [topSongs, setTopSongs] = useState({})
-  const { store, dispatch } = useContext(Context);
+  const { dispatch } = useContext(Context);
 
   useEffect(() => {
     spotifyApi.getMyTopTracks({
