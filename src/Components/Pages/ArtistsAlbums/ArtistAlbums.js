@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListRow from '../../Shared/ListRow/ListRow';
@@ -30,8 +30,9 @@ export default function Artists(props) {
   const classes = useStyles();
     const [albums, setAlbums] = useState({})
 
+
   useEffect(() => {
-    spotifyApi.getArtistAlbums(props.match.params.id)
+    spotifyApi.getArtistAlbums(props.match.params.id, { market: 'es', include_groups: 'album' })
     .then((response) => {
       setAlbums(response);
     })
@@ -39,19 +40,25 @@ export default function Artists(props) {
   }, []);
 
   return (
-      <div className="userPlaylists">
-        <div className="container">
-          <CardHeader
-          title="Albums"
-          className={classes.header}
-        />
+    <div className="userPlaylistsCont">
+    { (albums.items) 
+      ? <div className="userPlaylists">
+          <div className="Container">
+            <CardHeader
+            title="Albums"
+            className={classes.header}
+            />
+          </div>
+          <div className="artistListContainer">
+              { (albums.items) ? albums.items.map((album) => <AlbumList key={album.id} album={album} />) : null }
+          </div>
+          <br/>
         </div>
-        <div className="listContainer">
-        <List>
-          { (albums.items) ? albums.items.map((album) => <AlbumList key={album.id} album={album} />) : null }
-        </List>
+      : <div className="full">
+          <img src="https://github.com/phillipsja97/react-spotify/blob/master/src/Assets/music_loading.gif?raw=true" />
         </div>
-        <br/>
+    }
     </div>
-  );
-}
+    );
+  }
+

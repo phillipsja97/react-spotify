@@ -2,3 +2,10 @@
   overflow-y: scroll;
   height: 60vh;
 }
+
+.full {
+  height: 100vh;
+  display: flex;
+  justify-content: center !important;
+  align-items: center !important;
+}

@@ -38,19 +38,27 @@ export default function Playlists() {
   }, []);
 
   return (
-      <div className="userPlaylists">
-        <div className="container">
-          <CardHeader
-          title="My Playlists"
-          className={classes.header}
-        />
+    <div className="userPlaylists">
+    { (playlists.items)
+      ? 
+          <div className="userPlaylists">
+            <div className="container">
+              <CardHeader
+              title="My Playlists"
+              className={classes.header}
+            />
+            </div>
+            <div className="listContainer">
+            <List>
+              { (playlists.items) ? playlists.items.map((playlist) => <ListRow key={playlist.id} playlist={playlist} />) : null }
+            </List>
+            </div>
+            <br/>
         </div>
-        <div className="listContainer">
-        <List>
-          { (playlists.items) ? playlists.items.map((playlist) => <ListRow key={playlist.id} playlist={playlist} />) : null }
-        </List>
+      : <div className="full">
+         <img src="https://github.com/phillipsja97/react-spotify/blob/master/src/Assets/music_loading.gif?raw=true" />
         </div>
-        <br/>
+    }
     </div>
   );
 }
