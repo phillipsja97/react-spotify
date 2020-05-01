@@ -5,6 +5,10 @@
   box-shadow: 0 8px 6px -6px #01FFC3;
 }
 
-.navbar-text {
+#navbar-text {
   color: #FFB3FD !important;
+}
+
+#navbar-text:hover {
+  color: #01FFFF !important;
 }

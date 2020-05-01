@@ -90,10 +90,6 @@ export default function ProfileCard(props) {
     .then((response) => {
       setUserProfile(response);
     })
-    console.log(props);
-    // const access = window.location.hash.split("#access_token=")[1];
-    // const token = access.split("&refresh_token=")[0];
-    // setTheToken(token);
   }, [userProfile.display_name]);
 
   const PlaylistRender = (e) => {
@@ -130,8 +126,8 @@ export default function ProfileCard(props) {
                 <p className={classes.statValue}>{userProfile.followers ? userProfile.followers.total : null}</p>
               </Box>
               <Box p={2} flex={'auto'} className={borderedGridStyles.item}>
-                <p className={classes.statLabel}>Following</p>
-                <p className={classes.statValue}>12</p>
+                <p className={classes.statLabel}>Account Type</p>
+                <p className={classes.statValue}>{userProfile.product}</p>
               </Box>
             </Box>
           </Card>
@@ -141,7 +137,7 @@ export default function ProfileCard(props) {
               <TopSongs />
             </div>
             <div className="display">
-              <Player />
+              { (store.currentSong) ? <Player /> : <img src="https://github.com/phillipsja97/react-spotify/blob/master/src/Assets/music_loading.gif?raw=true" /> }
             </div>
         </div>
       </div>

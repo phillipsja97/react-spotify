@@ -45,7 +45,7 @@ export default function TopSongs() {
        </div>
       <div className="scroll">
         <List>
-      { (topSongs.items) ? topSongs.items.map((songs) => <Tracks key={songs.id} songs={songs} />) : <div className="full"><img src="https://github.com/phillipsja97/react-spotify/blob/master/src/Assets/music_loading.gif?raw=true" /></div> }
+      { (topSongs.items) ? topSongs.items.map((songs) => <Tracks key={songs.id} songs={songs} />) : null }
         </List>
       </div>
     </div>
