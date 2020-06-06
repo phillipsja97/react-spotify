@@ -7,4 +7,6 @@
 * React.Js
 * Javascript
 * Spotify Web API
+* Spotify Widget
 * Material UI
+* React-Router-DOM
