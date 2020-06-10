@@ -10,3 +10,6 @@
 * Spotify Widget
 * Material UI
 * React-Router-DOM
+
+## Screenshots
+![image](https://github.com/phillipsja97/react-spotify/blob/master/src/Assets/SpotifyScreenshot.PNG?raw=true)
