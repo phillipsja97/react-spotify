@@ -5,6 +5,7 @@
 
 ## Tehcnologies Used
 * React.Js
+* Node.Js Server
 * Javascript
 * Spotify Web API
 * Spotify Widget
