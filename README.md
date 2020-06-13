@@ -14,3 +14,6 @@
 
 ## Screenshots
 ![image](https://github.com/phillipsja97/react-spotify/blob/master/src/Assets/SpotifyScreenshot.PNG?raw=true)
+
+## Playlists Route
+![image](https://github.com/phillipsja97/react-spotify/blob/master/src/Assets/spotifyscreenshot2.PNG?raw=true)
